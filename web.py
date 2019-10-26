@@ -13,7 +13,7 @@ def getHeader():
 @app.route("/ip")
 def getIp():
     try:
-        result = request.headers['Client-Ip']
+        result = request.headers['Client-Ip'].split(':')[0]
     except:
         result = request.remote_addr
     return result
