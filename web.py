@@ -17,3 +17,15 @@ def getIp():
     except:
         result = request.remote_addr
     return result
+
+@app.route("/useragent")
+def getUserAgent():
+    return request.headers['User-Agent']
+
+@app.route("/get/<name>")
+def getAny(name = None):
+    try:
+        result = {name: request.headers[name]}
+    except:
+        return "%s not found - may be misspelled?" % name, 404
+    return jsonify(result)
