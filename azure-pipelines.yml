@@ -28,12 +28,16 @@ steps:
 - task: CopyFiles@2
   inputs:
     SourceFolder: '.'
-    Contents: '**'
-    TargetFolder: '$(build.artifactstagingdirectory)\\merged'
+    Contents: |
+      **
+      !.git*
+      !*.md
+      !*.txt
+    TargetFolder: '$(build.artifactstagingdirectory)\\merged\\'
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(build.artifactStagingDirectory)\\merged'
+    rootFolderOrFile: '$(build.artifactStagingDirectory)\\merged\\'
     includeRootFolder: false
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)\\ziped\\$(Build.BuildNumber).zip'
