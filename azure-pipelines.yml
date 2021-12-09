@@ -10,16 +10,9 @@ pool:
   vmImage: ubuntu-latest
 strategy:
   matrix:
-    Python27:
-      python.version: '2.7'
-    Python35:
-      python.version: '3.5'
-    Python36:
-      python.version: '3.6'
     Python37:
       python.version: '3.7'
-    Python38:
-      python.version: '3.8'
+
 
 steps:
 - task: UsePythonVersion@0
@@ -32,3 +25,22 @@ steps:
     pip install -r requirements.txt
   displayName: 'Install dependencies'
 
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '.\'
+    Contents: '**'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(build.artifactStagingDirectory)'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)\\ziped\\$(Build.BuildNumber).zip'
+    replaceExistingArchive: true
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)\\ziped\\$(Build.BuildNumber).zip'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
