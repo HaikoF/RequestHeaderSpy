@@ -29,11 +29,11 @@ steps:
   inputs:
     SourceFolder: '.'
     Contents: '**'
-    TargetFolder: '$(build.artifactstagingdirectory)'
+    TargetFolder: '$(build.artifactstagingdirectory)\\merged'
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(build.artifactStagingDirectory)'
+    rootFolderOrFile: '$(build.artifactStagingDirectory)\\merged'
     includeRootFolder: false
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)\\ziped\\$(Build.BuildNumber).zip'
