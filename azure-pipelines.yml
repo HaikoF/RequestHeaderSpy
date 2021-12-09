@@ -27,12 +27,15 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: '.'
+    SourceFolder: $(Build.SourcesDirectory)
     Contents: |
       **
       !.git*
+      !.git/**/*
+      !.github/**/*
       !*.md
       !*.txt
+      !.yml
     TargetFolder: '$(build.artifactstagingdirectory)\\merged\\'
 
 - task: ArchiveFiles@2
