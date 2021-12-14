@@ -36,18 +36,18 @@ steps:
       !*.md
       !*.txt
       !*.yml
-    TargetFolder: '$(build.artifactstagingdirectory)\\merged\\'
+    TargetFolder: '$(build.artifactstagingdirectory)/merged/'
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(build.artifactStagingDirectory)\\merged\\'
+    rootFolderOrFile: '$(build.artifactStagingDirectory)/merged/'
     includeRootFolder: false
     archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)\\ziped\\$(Build.BuildNumber).zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/ziped/$(Build.BuildNumber).zip'
     replaceExistingArchive: true
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)\\ziped\\$(Build.BuildNumber).zip'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/ziped/$(Build.BuildNumber).zip'
     ArtifactName: 'drop'
     publishLocation: 'Container'
