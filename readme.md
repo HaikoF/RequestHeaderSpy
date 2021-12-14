@@ -10,6 +10,8 @@ you need
 I used the visualStudio Code tutorial: 
 https://docs.microsoft.com/en-us/azure/python/tutorial-deploy-app-service-on-linux-01
 
+In addition I also created a azure-pipeline to build an artifact that can easily be deployed
+
 ### Configuration
 in your AppService under configuration->General Settings add the Startup Command: 
 `gunicorn --bind=0.0.0.0 --workers=4 startup:app`
